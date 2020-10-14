@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>Show Map with directions - Leaflet Js</title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="googlebot" content="noindex, nofollow">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.2.0/leaflet.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.2.0/leaflet.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-routing-machine/3.2.5/leaflet-routing-machine.js"></script>
+    <link rel="stylesheet" type="text/css"
+          href="https://cdnjs.cloudflare.com/ajax/libs/leaflet-routing-machine/3.2.5/leaflet-routing-machine.css">
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/perliedman-leaflet-control-geocoder/1.5.5/Control.Geocoder.min.js"></script>
+    <link rel="stylesheet" type="text/css"
+          href="https://cdnjs.cloudflare.com/ajax/libs/perliedman-leaflet-control-geocoder/1.5.5/Control.Geocoder.min.css">
+    <style id="compiled-css" type="text/css">
+    </style>
+    <script id="insert"></script>
+</head>
+<body>
+<div style="height: 400px;" id="mapid">
+</div>
+<script type="text/javascript">//<![CDATA[
+var mymap = L.map('mapid').setView([36.713415, 10.223161], 12);
+console.log(mymap);
+L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png').addTo(mymap);
+var control = L.Routing.control({
+    waypoints: [
+        L.latLng(36.713415, 10.223161),
+        L.latLng(36.713415, 10.223161)
+    ],
+    router: new L.Routing.osrmv1({
+        language: 'fr',
+        profile: 'car'
+    }),
+    geocoder: L.Control.Geocoder.nominatim({})
+}).addTo(mymap);
+//]]></script>
+
+<script>
+    // tell the embed parent frame the height of the content
+    if (window.parent && window.parent.parent) {
+        window.parent.parent.postMessage(["resultsFrame", {
+            height: document.body.getBoundingClientRect().height,
+            slug: "psv9zu4x"
+        }], "*")
+    }
+
+    // always overwrite window.name, in case users try to set it manually
+    window.name = "result"
+    $(window).on('load', function() {
+        $( "input[placeholder='Start']" ).val('');
+    });
+</script>
+</body>
+</html>
